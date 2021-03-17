@@ -45,9 +45,12 @@ group :development, :test do
 
   gem 'database_cleaner'
   gem 'rspec-rails'
+  gem 'factory_bot_rails', '~> 6.1'
+  gem 'faker', '~> 2.17'
 end
 
 group :test do
+  gem 'capybara'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 4.0'
 end
