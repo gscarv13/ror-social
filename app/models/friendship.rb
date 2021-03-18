@@ -1,4 +1,7 @@
 class Friendship < ApplicationRecord
-  belongs_to :sent_by
-  belongs_to :send_to
+  validates :user_id, presence: true
+  validates :sent_to_id, presence: true
+
+  belongs_to :user
+  belongs_to :sent_to, class_name: 'User'
 end
