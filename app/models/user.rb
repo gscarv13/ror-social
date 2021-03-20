@@ -16,15 +16,15 @@ class User < ApplicationRecord
   def friends_list
     friends_array = friendships.map { |f| f.sent_to if f.status }
     friends_array << friends.map { |f| f.user if f.status }
-    friends_array.compact
+    friends_array.compact.flatten
   end
 
   def pending_confirmation
-    friendships.map { |f| f.sent_to unless friendships.status }
+    friends.map { |f| f.user unless f.status }
   end
 
-  def friend_requested
-    friendships.map { |f| f.user unless f.status }
+  def friendship_requested
+    friendships.map { |f| f.sent_to unless f.status }
   end
 
   def confirm_friend(user)
@@ -34,6 +34,6 @@ class User < ApplicationRecord
   end
 
   def friend?(user)
-    friends.include?(user)
+    friends_list.include?(user)
   end
 end
