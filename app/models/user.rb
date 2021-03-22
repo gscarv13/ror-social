@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
-  has_many :friendships
+  has_many :friendships, dependent: :destroy
   has_many :friends, class_name: 'Friendship', foreign_key: 'sent_to_id'
 
   def friends_list
