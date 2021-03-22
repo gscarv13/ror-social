@@ -3,7 +3,8 @@ module FriendshipsHelper
     return unless user != current_user
 
     if current_user.pending_confirmation.include?(user)
-      link_to('Accept', '', class: 'btn btn-ok') + link_to('Reject', '', class: 'btn btn-cancel')
+      link_to('Accept', confirm_friendship_path(user), class: 'btn btn-ok') +
+        link_to('Reject', refuse_friendship_path(user), method: :delete, class: 'btn btn-cancel')
     elsif current_user.friendship_requested.include?(user)
       '<span class="btn btn-warning">Pending</span>'.html_safe
     elsif !current_user.friend?(user)
