@@ -24,13 +24,9 @@ class User < ApplicationRecord
   end
 
   def friendship_requested
-    friendships.map { |f| f.sent_to unless f.status }
-  end
+    arr = friendships.map { |f| f.sent_to unless f.status && !f.status.nil? }
 
-  def confirm_friend(user)
-    friendship = friends.find { |f| f.user == user }
-    friendship.status = true
-    friendship.save
+    arr.all?(nil) ? [] : arr
   end
 
   def friend?(user)
