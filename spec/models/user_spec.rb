@@ -33,8 +33,8 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#pending_comfirmation' do
-    it 'should not have no pending comfirmation' do
+  describe '#pending_confirmation' do
+    it 'should not have no pending confirmation' do
       expect(@user2.pending_confirmation).to be_empty
     end
 
