@@ -11,8 +11,7 @@ Rails.application.routes.draw do
   end
 
   get 'friendship/:id', to: 'friendships#add_friend', as: 'add_friend'
-  get 'friendship_add/:id', to: 'friendships#confirm', as: 'confirm_friendship'
-  delete 'friendship/:id', to: 'friendships#refuse', as: 'refuse_friendship'
+  get 'friendship_add/:id', to: 'friendships#confirmation', as: 'confirm_friendship'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -1,7 +1,7 @@
 class FriendshipsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
-  before_action :set_friendship, except: %i[add_friend]
+  before_action :set_friendship, only: %i[confirmation]
 
   def add_friend
     @friendship = Friendship.new(user: current_user, sent_to: @user, status: false)
@@ -9,15 +9,18 @@ class FriendshipsController < ApplicationController
     redirect_to users_path if @friendship.save
   end
 
-  def confirm
-    @friendship.status = true
-    redirect_to users_path if @friendship.save
-  end
+  def confirmation
+    @friendship = set_friendship
 
-  def refuse
-    @user = set_user
-    @friendship = Friendship.find_by(user: @user, sent_to: current_user)
-    @friendship.destroy
+    case params[:ok]
+    when '1'
+      @friendship.status = true
+      @friendship.save
+    when '0'
+      @user = set_user
+      @friendship.destroy
+    end
+
     redirect_to users_path
   end
 
