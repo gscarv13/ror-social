@@ -16,7 +16,7 @@ class User < ApplicationRecord
   def friends_list
     friends_array = friendships.map { |f| f.sent_to if f.status }
     friends_array << friends.map { |f| f.user if f.status }
-    friends_array.compact.flatten
+    friends_array.flatten.compact
   end
 
   def pending_confirmation
