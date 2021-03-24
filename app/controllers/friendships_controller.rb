@@ -10,9 +10,7 @@ class FriendshipsController < ApplicationController
   end
 
   def confirmation
-    @friendship = set_friendship
-
-    case params[:ok]
+    case confirmation_params[:ok]
     when '1'
       @friendship.status = true
       @friendship.save
@@ -32,5 +30,9 @@ class FriendshipsController < ApplicationController
 
   def set_friendship
     @friendship = Friendship.find_by(user: @user, sent_to: current_user)
+  end
+
+  def confirmation_params
+    params.permit(:id, :ok)
   end
 end
