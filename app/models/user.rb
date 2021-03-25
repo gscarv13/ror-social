@@ -14,9 +14,7 @@ class User < ApplicationRecord
   has_many :friends, class_name: 'Friendship', foreign_key: 'sent_to_id'
 
   def friends_list
-    friends_array = friendships.map { |f| f.sent_to if f.status }
-    friends_array << friends.map { |f| f.user if f.status }
-    friends_array.flatten.compact
+    Friendship.where(user: self)
   end
 
   def pending_confirmation
@@ -30,6 +28,6 @@ class User < ApplicationRecord
   end
 
   def friend?(user)
-    friends_list.include?(user)
+    Friendship.where(user: self, sent_to: user).empty? ? false : true
   end
 end

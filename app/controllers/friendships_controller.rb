@@ -25,9 +25,10 @@ class FriendshipsController < ApplicationController
       @reverse = Friendship.new(user: current_user, sent_to: @user, status: true)
       @friendship.save
       @reverse.save
-
+      flash[:notice] = 'Friend added!'
     when '0'
       @friendship.destroy
+      flash[:notice] = 'Declined friendship'
     end
 
     redirect_to users_path
