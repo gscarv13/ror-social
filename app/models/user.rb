@@ -9,4 +9,27 @@ class User < ApplicationRecord
   has_many :posts
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+
+  has_many :friendships, dependent: :destroy
+  has_many :friends, class_name: 'Friendship', foreign_key: 'sent_to_id'
+
+  def friends_list
+    friends_array = friendships.map { |f| f.sent_to if f.status }
+    friends_array << friends.map { |f| f.user if f.status }
+    friends_array.flatten.compact
+  end
+
+  def pending_confirmation
+    friends.map { |f| f.user unless f.status }
+  end
+
+  def friendship_requested
+    arr = friendships.map { |f| f.sent_to unless f.status && !f.status.nil? }
+
+    arr.all?(nil) ? [] : arr
+  end
+
+  def friend?(user)
+    friends_list.include?(user)
+  end
 end
