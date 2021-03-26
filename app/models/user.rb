@@ -14,20 +14,14 @@ class User < ApplicationRecord
   has_many :friends, class_name: 'Friendship', foreign_key: 'sent_to_id'
 
   def friends_list
-    Friendship.where(user: self)
+    Friendship.where(user: self).pluck(:sent_to_id)
   end
 
   def pending_confirmation
-    friends.map { |f| f.user unless f.status }
+    friends.where(sent_to: self, status: false).pluck(:user_id)
   end
 
   def friendship_requested
-    arr = friendships.map { |f| f.sent_to unless f.status && !f.status.nil? }
-
-    arr.all?(nil) ? [] : arr
-  end
-
-  def friend?(user)
-    Friendship.where(user: self, sent_to: user).empty? ? false : true
+    friendships.where(user: self, status: false).pluck(:sent_to_id)
   end
 end
