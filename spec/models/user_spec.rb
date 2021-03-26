@@ -21,15 +21,12 @@ RSpec.describe User, type: :model do
     it 'should have friends' do
       expect(@user2.friends_list).to_not be_empty
     end
-  end
-
-  describe '#friend?' do
     it '@user2 should be friends with @user1' do
-      expect(@user2.friend?(@user1)).to be true
+      expect(@user2.friends_list.include?(@user1.id)).to be true
     end
 
     it '@user2 should not be friends with @not_friend' do
-      expect(@user2.friend?(@not_friend)).to be false
+      expect(@user2.friends_list.include?(@not_friend.id)).to be false
     end
   end
 
