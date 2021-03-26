@@ -23,6 +23,7 @@ RSpec.feature 'Friendship', type: :feature do
   scenario 'request friendship should be successful' do
     request_friend(@elliot, "#RQ#{@darlene.id}")
     expect(page).to have_content('Pending')
+    expect(page).to have_content('Friend request sent successfully')
     click_link 'Sign out'
   end
 
@@ -34,6 +35,7 @@ RSpec.feature 'Friendship', type: :feature do
     visit users_path
     find("#AC#{@darlene.id}").click
     expect(page).to have_content('Friend')
+    expect(page).to have_content('Friend added!')
   end
 
   scenario 'refuse friend request should be successful' do
@@ -45,5 +47,6 @@ RSpec.feature 'Friendship', type: :feature do
     visit users_path
     find("#RF#{@new_user.id}").click
     expect(page).to have_content('Friend Request')
+    expect(page).to have_content('Declined friendship')
   end
 end
