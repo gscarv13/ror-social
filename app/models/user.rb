@@ -14,7 +14,7 @@ class User < ApplicationRecord
   has_many :friends, class_name: 'Friendship', foreign_key: 'sent_to_id'
 
   def friends_list
-    Friendship.where(user: self).pluck(:sent_to_id)
+    Friendship.where(user: self, status: true).pluck(:sent_to_id)
   end
 
   def pending_confirmation
