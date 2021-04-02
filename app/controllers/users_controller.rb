@@ -3,7 +3,9 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    @friends = current_user.friends_list
+    @pending = current_user.pending_confirmation
+    @requested = current_user.friendship_requested
+    @friend_list = current_user.friends_list
   end
 
   def show

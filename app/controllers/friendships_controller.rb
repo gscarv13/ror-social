@@ -6,17 +6,29 @@ class FriendshipsController < ApplicationController
   def add_friend
     @friendship = Friendship.new(user: current_user, sent_to: @user, status: false)
 
-    redirect_to users_path if @friendship.save
+    if @friendship.saved?
+      flash[:alert] = 'Friendship already exists'
+    else
+      flash[:notice] = 'Friend request sent successfully'
+      @friendship.save
+    end
+
+    redirect_to users_path
   end
 
   def confirmation
+    @user = set_user
+
     case confirmation_params[:ok]
     when '1'
       @friendship.status = true
+      @reverse = Friendship.new(user: current_user, sent_to: @user, status: true)
       @friendship.save
+      @reverse.save
+      flash[:notice] = 'Friend added!'
     when '0'
-      @user = set_user
       @friendship.destroy
+      flash[:notice] = 'Declined friendship'
     end
 
     redirect_to users_path

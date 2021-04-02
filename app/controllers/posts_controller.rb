@@ -2,8 +2,9 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    user_hash = { user_id: [current_user, current_user.friends_list].flatten }
     @post = Post.new
-    timeline_posts
+    @timeline_posts = Post.all.timeline_posts(user_hash)
   end
 
   def create
@@ -18,11 +19,6 @@ class PostsController < ApplicationController
   end
 
   private
-
-  def timeline_posts
-    user_hash = { user_id: [current_user, current_user.friends_list.map(&:id)].flatten }
-    @timeline_posts ||= Post.all.ordered_by_most_recent.includes(:user).where(user_hash)
-  end
 
   def post_params
     params.require(:post).permit(:content)

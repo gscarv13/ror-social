@@ -1,6 +1,6 @@
 # Scaffold for social media app with Ruby on Rails
 
-> This repo includes intial code for social media app with basic styling. Its purpose is to be a starting point for Microverse students.
+> This project is a social media built with the Ruby on Rails framework and Postgres as the database.
 
 ## Built With
 
@@ -24,7 +24,7 @@ Postgres: >=9.5
 
 ### Setup
 
-Instal gems with:
+Install gems with:
 
 ```
 bundle install
@@ -36,16 +36,6 @@ Setup database with:
    rails db:create
    rails db:migrate
 ```
-
-### Github Actions
-
-To make sure the linters' checks using Github Actions work properly, you should follow the next steps:
-
-1. On your recently forked repo, enable the GitHub Actions in the Actions tab.
-2. Create the `feature/branch` and push.
-3. Start working on your milestone as usual.
-4. Open a PR from the `feature/branch` when your work is done.
-
 
 ### Usage
 
@@ -59,35 +49,30 @@ Open `http://localhost:3000/` in your browser.
 
 ### Run tests
 
+To run the tests, move to the root folder of the project and enter the following command:
+
 ```
-    rpsec --format documentation
+    RSpec --format documentation
 ```
-
-> Tests will be added by Microverse students. There are no tests for initial features in order to make sure that students write all tests from scratch.
-
-### Deployment
-
-TBA
 
 ## Authors
 
-TBA
+👤 **Gustavo Carvalho**
+
+- GitHub: [@gscarv13](https://github.com/gscarv13)
+- Twitter: [@Gscarv13](https://twitter.com/Gscarv13)
+- LinkedIn: [Gustavo Carvalho](www.linkedin.com/in/gscarv13)
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!
+Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](issues/).
+Feel free to check the [issues page](https://github.com/gscarv13/ror-social-scaffold/issues).
 
 ## Show your support
 
 Give a ⭐️ if you like this project!
 
-## Acknowledgments
-
-TBA
-
 ## 📝 License
 
-TBA
-
+This project is [MIT](LICENSE) licensed.
