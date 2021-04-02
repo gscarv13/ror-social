@@ -15,4 +15,32 @@ module ApplicationHelper
       link_to('Like!', post_likes_path(post_id: post.id), method: :post)
     end
   end
+
+  def nav_authentication
+    if current_user
+      link_to 'Sign out', destroy_user_session_path, method: :delete
+    else
+      link_to 'Sign in', user_session_path
+    end
+  end
+
+  def notice_flash
+    html_string = ''
+    if notice.present?
+      html_string << '<div class="notice">'
+      html_string << "<p> #{notice} </p>"
+      html_string << '</div>'
+    end
+    html_string.html_safe
+  end
+
+  def alert_flash
+    html_string = ''
+    if alert.present?
+      html_string << '<div class="alert">'
+      html_string << "<p> #{alert} </p>"
+      html_string << '</div>'
+    end
+    html_string.html_safe
+  end
 end
