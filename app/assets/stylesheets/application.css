@@ -13,3 +13,32 @@
  *= require_tree .
  *= require_self
  */
+
+.btn {
+  padding: 5px 10px;
+  border: 0.5px solid black;
+  margin: 0 5px;
+  border-radius: 8px;
+}
+
+.btn-ok {
+  background-color: #0f9;
+  border-color: #0f9;
+}
+
+.btn-cancel {
+  background-color: #f66;
+  color: #fff;
+  border-color: #f66;
+}
+
+.btn-info {
+  background-color: #5f27cd;
+  color: #fff;
+  border-color: #5f27cd;
+}
+
+.btn-warning {
+  background-color: #fff35c;
+  border-color: #fff35c;
+}
